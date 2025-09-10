@@ -1,4 +1,6 @@
 $ErrorActionPreference = "Stop"
+$here = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $MyInvocation.MyCommand.Path }
+Set-Location (Split-Path -Parent $here)   
 $today = Get-Date -Format "yyyy-MM-dd"
 $y = Get-Date -Format "yyyy"
 $m = Get-Date -Format "MM"
