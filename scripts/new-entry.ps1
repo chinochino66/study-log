@@ -8,7 +8,7 @@ $dir = "logs/$y/$m"
 New-Item -ItemType Directory -Force -Path $dir | Out-Null
 $file = "$dir/$today.md"
 if (-not (Test-Path $file)) {
-@"
+$tpl = @"
 # $today
 ## 何をやったか
 -
@@ -16,7 +16,9 @@ if (-not (Test-Path $file)) {
 -
 ## 所要時間
 - 分
-"@ | Out-File -Encoding UTF8 $file
+"@
+  $tpl = $tpl -replace "`r`n","`n" -replace "`r","`n"
+  [IO.File]::WriteAllText($file, $tpl, [Text.UTF8Encoding]::new($false))
 }
 git add $file
 git commit -m "study: $today 学習ログ"
