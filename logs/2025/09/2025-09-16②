@@ -1,0 +1,74 @@
+Anacondaをダウンロードする。
+
+### 🔹 Anacondaを入れるメリット
+
+* **最初からJupyter Notebook入り**（個別にpipで入れる必要なし）
+* **NumPy / Pandas / matplotlib / scikit-learn** など主要ライブラリが全部まとまって入る
+* 仮想環境をGUIで管理できるから、初心者でも環境が壊れにくい
+
+### 🔹 デメリット
+
+* サイズが大きい（数GB）
+* 余計なライブラリも大量に入る
+* PCの容量を圧迫しやすい
+
+---
+
+### 🔹 pipで入れる場合（軽量派）
+
+* 本当に必要なものだけインストールできる
+* 容量は少なめ
+* ただし自分でライブラリ管理（`pip install`）が必要
+
+---
+
+## ✅ 今日（9月16日）の流れ
+
+### 1. Anacondaの確認
+
+* スタートメニューから **Anaconda Prompt** を開く
+* 次のコマンドを入力：
+
+  ```bash
+  conda --version
+  python --version
+  ```
+
+  → これで Anaconda と Python が正しくインストールされているか確認できる。
+
+---
+
+### 2. Jupyter Notebookを立ち上げる
+
+* 同じく Anaconda Prompt で次を入力：
+
+  ```bash
+  jupyter notebook
+  ```
+* safariのブラウザで一旦開く
+
+---
+
+### 3. Notebookで簡単な復習
+
+* 「New」→「Python 3」で新しいノートを作成
+* 下記を試す（文法復習）：
+
+```python
+# 計算
+2 + 3
+
+# 変数
+x = 10
+y = 5
+x * y
+
+# 文字列
+name = "Chino"
+"Hello " + name
+
+# リスト
+nums = [1, 2, 3]
+for n in nums:
+    print("n =", n)
+```
