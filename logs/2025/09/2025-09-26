@@ -1,0 +1,97 @@
+## 📘 今日の学習構成
+
+### **Step 1：JOINの基礎を頭に叩き込む（理論）**
+
+1. **INNER JOIN**
+
+   * 両方のテーブルに共通するキーだけ残す
+   * →「交差集合」を取るイメージ
+
+   ```sql
+   SELECT c.customer_id, c.name, o.order_id
+   FROM Customers c
+   INNER JOIN Orders o
+     ON c.customer_id = o.customer_id;
+   ```
+
+   ✅ 両方に存在する `customer_id` のみ出力
+
+2. **LEFT JOIN**
+
+   * 左のテーブルは「全部」残す、右は合致するものだけ
+   * 合致しなければ `NULL`
+
+   ```sql
+   SELECT c.customer_id, c.name, o.order_id
+   FROM Customers c
+   LEFT JOIN Orders o
+     ON c.customer_id = o.customer_id;
+   ```
+
+   ✅ 左側が主役、「欠けがあっても残す」
+
+👉 この違いを図解イメージ：
+
+* **INNER JOIN** → 「交わっている部分だけ」
+* **LEFT JOIN** → 「左全部＋右の合致」
+
+---
+
+### **Step 2：JOINを実際に書いてみる（練習クエリ）**
+
+#### 練習① INNER JOIN
+
+「ユーザーごとの注文を取得」
+
+```sql
+SELECT u.id, u.name, o.order_id, o.amount
+FROM Users u
+INNER JOIN Orders o
+  ON u.id = o.user_id;
+```
+
+#### 練習② LEFT JOIN
+
+「全ユーザーと、その注文（なければNULL）」
+
+```sql
+SELECT u.id, u.name, o.order_id, o.amount
+FROM Users u
+LEFT JOIN Orders o
+  ON u.id = o.user_id;
+```
+
+#### 練習③ LEFT JOIN応用（フィルタ）
+
+「注文をしたことがないユーザー」
+
+```sql
+SELECT u.id, u.name
+FROM Users u
+LEFT JOIN Orders o
+  ON u.id = o.user_id
+WHERE o.order_id IS NULL;
+```
+
+---
+
+### **Step 3：LeetCode SQL 7問に挑戦**
+
+---
+
+### **Step 4：実行計画を読む**
+
+PostgreSQLを例に：
+
+```sql
+EXPLAIN SELECT ...;
+```
+
+確認するポイント：
+
+* **Nested Loop**（小さいテーブル×大きいテーブル → 効率悪いと遅い）
+* **Hash Join**（JOIN前にハッシュテーブルを作る → 大きめテーブルでも速い）
+* **Merge Join**（ソート済み同士の結合 → 中規模データに有効）
+
+👉 実際の現場では「どうJOINしてるか」でクエリ速度が数十倍変わる。
+「JOIN条件にインデックスがあるか？」も意識。
