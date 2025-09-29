@@ -1,7 +1,16 @@
 title: "Study Log"
+theme: minima           # 好みでOK（なくても可）
 markdown: kramdown
 kramdown:
   math_engine: mathjax
-  syntax_highlighter_opts:
-    block:
-      line_numbers: false
+  input: GFM
+
+# 「logs 配下の md には自動で default レイアウトを当てる」
+defaults:
+  - scope:
+      path: "logs"
+      type: "pages"
+    values:
+      layout: default
+
+# ブログではないので collections は不要
