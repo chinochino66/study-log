@@ -1,0 +1,7 @@
+title: "Study Log"
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
